@@ -101,11 +101,11 @@ void setup() {
 
   frequency_disp(frequ[0], '0', 1);
   frequency_disp(frequ[1], '0' + 1, 0);
-  pinMode(2, INPUT_PULLUP);
-  pinMode(3, INPUT_PULLUP);
+  pinMode(0, INPUT_PULLUP);
+  pinMode(1, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(2), interrupt,  CHANGE);
-  attachInterrupt(digitalPinToInterrupt(3), interrupt,  CHANGE);
+  attachInterrupt(digitalPinToInterrupt(0), interrupt,  CHANGE);
+  attachInterrupt(digitalPinToInterrupt(1), interrupt,  CHANGE);
   interrupt();
 }
 
@@ -124,8 +124,8 @@ uint64_t  p10(uint64_t n)
 
 void interrupt()
 {
-  stata[0] = digitalRead(2);
-  statb[0] = digitalRead(3);
+  stata[0] = digitalRead(0); //2
+  statb[0] = digitalRead(1); //3
   if (stata[0] != stata[1] || statb[0] != statb[1])
   {
     if (stata[0] == statb[0])
@@ -258,9 +258,9 @@ void frequency_disp(int64_t freqq, char chanall, int mark)
 unsigned long pulsein(int pin, int len)
 {
   unsigned long start = millis();
-  if (digitalRead(4) == LOW)
+  if (digitalRead(4) == LOW) //4
   {
-    while ( (digitalRead(4) == LOW) && ((millis() - start) < len) );
+    while ( (digitalRead(4) == LOW) && ((millis() - start) < len) ); //4
     return (millis() - start);
   }
   else
