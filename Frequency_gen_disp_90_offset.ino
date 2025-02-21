@@ -104,8 +104,8 @@ void setup() {
   pinMode(0, INPUT_PULLUP);
   pinMode(1, INPUT_PULLUP);
   pinMode(4, INPUT_PULLUP);
-  attachInterrupt(digitalPinToInterrupt(0), interrupt,  CHANGE);
-  attachInterrupt(digitalPinToInterrupt(1), interrupt,  CHANGE);
+  attachInterrupt(digitalPinToInterrupt(0), interrupt,  RISING); //CHANGE casues encoder doubles
+  attachInterrupt(digitalPinToInterrupt(1), interrupt,  RISING);
   interrupt();
 }
 
